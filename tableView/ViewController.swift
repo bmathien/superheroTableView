@@ -10,8 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var myTableView: UITableView!
-    var superheros = ["Superman", "Batman", "Spiderman", "Flash", "Hulk", "Ironman"]
-    var realName = ["Clark Kent", "Bruce Wayne", "kfdslk", "Barry", "Bruce Banner", "Tony Stark"]
+    var superheros = ["Superman", "Batman", "Spiderman", "Flash", "Hulk", "Ironman", "Aqauman"]
+    var realName = ["Clark Kent", "Bruce Wayne", "kfdslk", "Barry", "Bruce Banner", "Tony Stark", "Arthur"]
 
 
     override func viewDidLoad()
