@@ -10,10 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var myTableView: UITableView!
-    @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var superheros = ["Superman", "Batman", "Spiderman", "Flash", "Hulk", "Ironman", "Aqauman"]
-    var realName = ["Clark Kent", "Bruce Wayne", "kfdslk", "Barry", "Bruce Banner", "Tony Stark", "Arthur"]
+    var superheros : [SuperHero] = []
 
 
     override func viewDidLoad()
@@ -21,7 +19,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         myTableView.dataSource = self
         myTableView.delegate = self
-        editButton.tag = 0
+        
+        superheros.append(SuperHero(Name: "Superman", Alias: "Clark Kent", Power: 95, Image: UIImage(named: "superman")!))
+        superheros.append(SuperHero(Name: "Batman", Alias: "Bruce Wayne", Power: 84, Image: UIImage(named: "batman")!))
+        superheros.append(SuperHero(Name: "Spiderman", Alias: "Peter Parker", Power: 92, Image: UIImage(named: "spiderman")!))
+        superheros.append(SuperHero(Name: "The Flash", Alias: "Barry Allen", Power: 88, Image: UIImage(named: "flash")!))
+        superheros.append(SuperHero(Name: "The Hulk", Alias: "Bruce Banner", Power: 80, Image: UIImage(named: "hulk")!))
+        superheros.append(SuperHero(Name: "Ironman", Alias: "Tony Stark", Power: 90, Image: UIImage(named: "ironman")!))
+        superheros.append(SuperHero(Name: "Aquaman", Alias: "Arther Allen", Power: 79, Image: UIImage(named: "aquaman")!))
+
     }
     
     @IBAction func addButtonTapped(sender: AnyObject)
@@ -38,10 +44,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         let addAction = UIAlertAction(title: "Add", style: .Default) { (addAction) -> Void in
-            let superheroNameTF = myAlert.textFields![0] as UITextField
-            let aliasTF = myAlert.textFields![1] as UITextField
-            self.superheros.append(superheroNameTF.text!)
-            self.realName.append(aliasTF.text!)
+            let superheroNameTF = myAlert.textFields![0]
+            let aliasTF = myAlert.textFields![1]
+            self.superheros.append(SuperHero(Name: superheroNameTF.text!, Alias: aliasTF.text!))
             self.myTableView.reloadData()
         }
         myAlert.addAction(addAction)
@@ -55,16 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func editButtonTapped(sender: UIBarButtonItem)
     {
-        if sender.tag == 0
-        {
-            myTableView.editing = true
-            sender.tag = 1
-        }
-        else
-        {
-            myTableView.editing = false
-            sender.tag = 0
-        }
+        myTableView.editing = !myTableView.editing
     }
     
     
@@ -72,8 +68,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       
         // let cell = myTableView.dequeueReusableCellWithIdentifier("myCell")! as UITableViewCell
         let cell = myTableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        cell.textLabel!.text = superheros[indexPath.row]
-        cell.detailTextLabel?.text = realName[indexPath.row]
+        cell.textLabel!.text = superheros[indexPath.row].name
+        cell.detailTextLabel?.text = superheros[indexPath.row].alias
    
         return cell
     }
@@ -89,7 +85,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .Delete
         {
             superheros.removeAtIndex(indexPath.row)
-            realName.removeAtIndex(indexPath.row)
             myTableView.reloadData()
         }
     }
@@ -104,11 +99,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let superhero = superheros[sourceIndexPath.row]
         superheros.removeAtIndex(sourceIndexPath.row)
         superheros.insert(superhero, atIndex: destinationIndexPath.row)
-        
-        let alias = realName[sourceIndexPath.row]
-        realName.removeAtIndex(sourceIndexPath.row)
-        realName.insert(alias, atIndex: destinationIndexPath.row)
-        
     }
     
 
