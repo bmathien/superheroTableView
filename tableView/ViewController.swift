@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     var superheros = ["Superman", "Batman", "Spiderman", "Flash", "Hulk", "Ironman", "Aqauman"]
     var realName = ["Clark Kent", "Bruce Wayne", "kfdslk", "Barry", "Bruce Banner", "Tony Stark", "Arthur"]
 
@@ -19,6 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         myTableView.dataSource = self
         myTableView.delegate = self
+        editButton.tag = 0
     }
     
     @IBAction func addButtonTapped(sender: AnyObject)
@@ -50,6 +53,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.presentViewController(myAlert, animated: true, completion: nil)
     }
     
+    @IBAction func editButtonTapped(sender: UIBarButtonItem)
+    {
+        if sender.tag == 0
+        {
+            myTableView.editing = true
+            sender.tag = 1
+        }
+        else
+        {
+            myTableView.editing = false
+            sender.tag = 0
+        }
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
       
         // let cell = myTableView.dequeueReusableCellWithIdentifier("myCell")! as UITableViewCell
@@ -79,6 +97,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool
     {
         return true
+    }
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
+    {
+        let superhero = superheros[sourceIndexPath.row]
+        superheros.removeAtIndex(sourceIndexPath.row)
+        superheros.insert(superhero, atIndex: destinationIndexPath.row)
+        
+        let alias = realName[sourceIndexPath.row]
+        realName.removeAtIndex(sourceIndexPath.row)
+        realName.insert(alias, atIndex: destinationIndexPath.row)
+        
     }
     
 
