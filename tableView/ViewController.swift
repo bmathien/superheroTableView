@@ -101,6 +101,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         superheros.insert(superhero, atIndex: destinationIndexPath.row)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let detailView = segue.destinationViewController as! DetailViewController
+        let selectedRow = myTableView.indexPathForSelectedRow?.row
+        
+        detailView.superhero = superheros[selectedRow!]
+        
+    }
+    
 
 
 

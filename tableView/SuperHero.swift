@@ -13,7 +13,7 @@ class SuperHero: NSObject
     var name = ""
     var alias = ""
     var power = 0
-    var image = UIImage(named: "Default")
+    var image = UIImage(named: "default")
     
 
     init(Name: String, Alias: String, Power: Int, Image: UIImage)
