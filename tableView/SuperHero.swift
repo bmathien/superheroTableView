@@ -17,7 +17,8 @@ class SuperHero: NSObject
     
 
     init(Name: String, Alias: String, Power: Int, Image: UIImage)
-    {   super.init()
+    {
+//        super.init()
         name = Name
         alias = Alias
         power = Power
@@ -26,7 +27,8 @@ class SuperHero: NSObject
     
     init(Name: String, Alias: String)
     {
-        super.init()
+
+//        super.init()
         name = Name
         alias = Alias
     }

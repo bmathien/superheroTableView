@@ -28,7 +28,7 @@ class DetailViewController: UIViewController
         
     }
 
-    @IBAction func saveButtonTapped(sender: UIButton)
+    @IBAction func saveButtonTapped(_ sender: UIButton)
     {
         superhero.name = nameTextField.text!
         superhero.alias = aliasTextField.text!

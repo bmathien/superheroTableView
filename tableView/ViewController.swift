@@ -4,15 +4,19 @@
 //
 //  Created by Mathien on 1/12/16.
 //  Copyright © 2016 Mathien. All rights reserved.
-//
+///Users/teacher/Desktop/superheroTableView/tableView/ViewController.swift
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
     @IBOutlet weak var myTableView: UITableView!
     
     var superheros : [SuperHero] = []
 
+    override func viewDidAppear(_ animated: Bool) {
+        myTableView.reloadData()
+    }
 
     override func viewDidLoad()
     {
@@ -25,25 +29,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         superheros.append(SuperHero(Name: "Spiderman", Alias: "Peter Parker", Power: 92, Image: UIImage(named: "spiderman")!))
         superheros.append(SuperHero(Name: "The Flash", Alias: "Barry Allen", Power: 88, Image: UIImage(named: "flash")!))
         superheros.append(SuperHero(Name: "The Hulk", Alias: "Bruce Banner", Power: 80, Image: UIImage(named: "hulk")!))
-        superheros.append(SuperHero(Name: "Ironman", Alias: "Tony Stark", Power: 90, Image: UIImage(named: "ironman")!))
+        superheros.append(SuperHero(Name: "Ironman", Alias: "Tony Stark", Power: 90, Image: UIImage(named: "IronMan")!))
         superheros.append(SuperHero(Name: "Aquaman", Alias: "Arther Allen", Power: 79, Image: UIImage(named: "aquaman")!))
 
+        for element in superheros
+        {
+            print(element.name)
+            print(element.alias)
+
+        }
     }
     
-    @IBAction func addButtonTapped(sender: AnyObject)
+    @IBAction func addButtonTapped(_ sender: AnyObject)
     {
-        let myAlert = UIAlertController(title: "Add Superhero", message: nil, preferredStyle: .Alert)
+        let myAlert = UIAlertController(title: "Add Superhero", message: nil, preferredStyle: .alert)
         
         
-        myAlert.addTextFieldWithConfigurationHandler { (nameTextField) -> Void in
+        myAlert.addTextField { (nameTextField) -> Void in
             nameTextField.placeholder = "Add Superhero Name"
         }
         
-        myAlert.addTextFieldWithConfigurationHandler { (aliasTextField) -> Void in
+        myAlert.addTextField { (aliasTextField) -> Void in
             aliasTextField.placeholder = "Add Alias Name"
+            aliasTextField.keyboardType = .numberPad
         }
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (addAction) -> Void in
+        let addAction = UIAlertAction(title: "Add", style: .default) { (addAction) -> Void in
             let superheroNameTF = myAlert.textFields![0]
             let aliasTF = myAlert.textFields![1]
             self.superheros.append(SuperHero(Name: superheroNameTF.text!, Alias: aliasTF.text!))
@@ -51,23 +62,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         myAlert.addAction(addAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
         myAlert.addAction(cancelAction)
         
         
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
     }
     
-    @IBAction func editButtonTapped(sender: UIBarButtonItem)
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem)
     {
-        myTableView.editing = !myTableView.editing
+        myTableView.isEditing = !myTableView.isEditing
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         // let cell = myTableView.dequeueReusableCellWithIdentifier("myCell")! as UITableViewCell
-        let cell = myTableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = myTableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         cell.textLabel!.text = superheros[indexPath.row].name
         cell.detailTextLabel?.text = superheros[indexPath.row].alias
    
@@ -75,35 +86,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return superheros.count
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
-        if editingStyle == .Delete
+        if editingStyle == .delete
         {
-            superheros.removeAtIndex(indexPath.row)
+            superheros.remove(at: indexPath.row)
             myTableView.reloadData()
         }
     }
     
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
     
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         let superhero = superheros[sourceIndexPath.row]
-        superheros.removeAtIndex(sourceIndexPath.row)
-        superheros.insert(superhero, atIndex: destinationIndexPath.row)
+        superheros.remove(at: sourceIndexPath.row)
+        superheros.insert(superhero, at: destinationIndexPath.row)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let detailView = segue.destinationViewController as! DetailViewController
+        let detailView = segue.destination as! DetailViewController
         let selectedRow = myTableView.indexPathForSelectedRow?.row
         
         detailView.superhero = superheros[selectedRow!]

@@ -200,15 +200,18 @@
 					08112B4D1C45803600E493EB = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = N6872PRBK9;
+						LastSwiftMigration = 0820;
 					};
 					08112B611C45803600E493EB = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = N6872PRBK9;
+						LastSwiftMigration = 0820;
 						TestTargetID = 08112B4D1C45803600E493EB;
 					};
 					08112B6C1C45803600E493EB = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = N6872PRBK9;
+						LastSwiftMigration = 0820;
 						TestTargetID = 08112B4D1C45803600E493EB;
 					};
 				};
@@ -414,6 +417,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -425,6 +429,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -436,6 +441,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tableView.app/tableView";
 			};
 			name = Debug;
@@ -448,6 +454,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tableView.app/tableView";
 			};
 			name = Release;
@@ -459,6 +466,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableViewUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = tableView;
 				USES_XCTRUNNER = YES;
 			};
@@ -471,6 +479,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = B.mathien.tableViewUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = tableView;
 				USES_XCTRUNNER = YES;
 			};
